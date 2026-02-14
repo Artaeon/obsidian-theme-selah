@@ -1,8 +1,8 @@
 # Selah
 
-Obsidian as a terminal.
+Obsidian as a terminal emulator.
 
-One surface. No ribbon. No scrollbar. Monospace everything. Heading markers visible in reading mode. Bold is bright. Italic is yellow. Tags are `[bracketed]`. HR is dashed. Status bar is a tmux bar. Folders are blue like `ls`. Green accent.
+Zero transitions. Zero shadows. Zero animations. Zero rounded corners. Zero scrollbars. One background. Everything monospace. ANSI colors. The UI disappears.
 
 ```
 cp -r obsidian-theme-selah ~/.obsidian/themes/Selah
