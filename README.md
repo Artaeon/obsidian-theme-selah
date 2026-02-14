@@ -1,8 +1,6 @@
 # Selah
 
-*Be still, and know.* — Psalm 46:10
-
-A quiet Obsidian theme for those who build and believe. Serif text on parchment tones. Nothing extra.
+Monochrome Obsidian theme. No color. Just work.
 
 ## Install
 
@@ -14,12 +12,10 @@ cp -r obsidian-theme-selah ~/.obsidian/themes/Selah
 
 ## Design
 
-- Serif text (Palatino, Georgia) for reading and writing
-- System sans for UI, monospace for code
-- Warm parchment palette — cream whites, leather darks
-- Antique gold accent
-- 1.8 line height — room to breathe
-- ~160 lines of CSS total
+- Sans-serif (Inter / system)
+- Pure grayscale — zero accent color
+- Dark: `#0a0a0a` black. Light: `#ffffff` white.
+- ~150 lines of CSS
 
 ## License
 
