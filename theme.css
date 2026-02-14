@@ -1,9 +1,6 @@
 /* selah */
 
-/* ============================
-   perf: kill all animations, shadows, transitions globally
-   ============================ */
-
+/* perf: nuke every gpu-heavy effect */
 *, *::before, *::after {
   transition: none !important;
   animation: none !important;
@@ -12,10 +9,6 @@
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-
-/* ============================
-   foundation
-   ============================ */
 
 body {
   --font-interface-theme: 'SF Mono', 'JetBrains Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace;
@@ -58,9 +51,9 @@ body {
   -moz-osx-font-smoothing: auto;
 }
 
-/* ============================
-   dark
-   ============================ */
+/* ==================================================
+   DARK
+   ================================================== */
 
 .theme-dark {
   --accent-h: 130;
@@ -118,7 +111,7 @@ body {
   --h1-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
   --h2-color: var(--color-blue);
   --h3-color: var(--color-cyan);
-  --h4-color: var(--text-muted);
+  --h4-color: var(--color-purple);
   --h5-color: var(--text-muted);
   --h6-color: var(--text-faint);
   --code-background: var(--mono-surface);
@@ -130,11 +123,13 @@ body {
   --nav-item-background-hover: var(--background-modifier-hover);
   --nav-indentation-guide-color: var(--mono-border);
   --list-marker-color: var(--text-faint);
+  --metadata-label-color: var(--color-blue);
+  --metadata-input-background: var(--mono-surface);
 }
 
-/* ============================
-   light
-   ============================ */
+/* ==================================================
+   LIGHT
+   ================================================== */
 
 .theme-light {
   --accent-h: 130;
@@ -192,7 +187,7 @@ body {
   --h1-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
   --h2-color: var(--color-blue);
   --h3-color: var(--color-cyan);
-  --h4-color: var(--text-muted);
+  --h4-color: var(--color-purple);
   --h5-color: var(--text-muted);
   --h6-color: var(--text-faint);
   --code-background: var(--mono-surface);
@@ -204,11 +199,13 @@ body {
   --nav-item-background-hover: var(--background-modifier-hover);
   --nav-indentation-guide-color: var(--mono-border);
   --list-marker-color: var(--text-faint);
+  --metadata-label-color: var(--color-blue);
+  --metadata-input-background: var(--mono-surface);
 }
 
-/* ============================
-   one surface — everything is the same plane
-   ============================ */
+/* ==================================================
+   ONE SURFACE
+   ================================================== */
 
 .workspace-split,
 .workspace-leaf,
@@ -223,26 +220,52 @@ body {
 .titlebar,
 .view-header,
 .modal-bg,
-.modal {
+.modal,
+.menu,
+.prompt,
+.suggestion-container,
+.search-result-container,
+.backlink-pane,
+.tag-pane-tag-pane,
+.community-modal-sidebar {
   background: var(--mono-bg);
 }
 
-/* ============================
-   strip chrome
-   ============================ */
+/* ==================================================
+   STRIP ALL CHROME — nuke every decorative element
+   ================================================== */
 
-.workspace-ribbon.mod-left { display: none; }
-.workspace-tab-header-inner-close-button { display: none; }
-.workspace-tab-header-new-tab { display: none; }
-.view-header-icon { display: none; }
-.titlebar-button-container { opacity: 0.3; }
+.workspace-ribbon.mod-left,
+.workspace-tab-header-inner-close-button,
+.workspace-tab-header-new-tab,
+.workspace-tab-header-tab-list,
+.view-header-icon,
+.nav-header,
+.view-header-nav-buttons,
+.workspace-tab-header-spacer,
+.nav-buttons-container,
+.search-input-clear-button::before {
+  display: none;
+}
+
+.titlebar-button-container { opacity: 0.2; }
 ::-webkit-scrollbar { width: 0; height: 0; }
 
-/* view header — flatten into a path bar */
+/* ==================================================
+   VIEW HEADER — terminal path display
+   ================================================== */
+
 .view-header {
-  border-bottom: 1px solid var(--background-modifier-border);
-  height: 28px;
+  border-bottom: 1px solid var(--mono-border);
+  height: 26px;
+  min-height: 26px;
   padding: 0 8px;
+}
+
+.view-header-title-container::before {
+  content: "~/";
+  color: var(--text-faint);
+  font-size: 12px;
 }
 
 .view-header-title {
@@ -250,26 +273,29 @@ body {
   color: var(--text-muted);
 }
 
-/* ============================
-   pane splits — tmux borders
-   ============================ */
+/* ==================================================
+   PANE SPLITS — tmux style
+   ================================================== */
 
 .workspace-leaf-resize-handle {
-  background: var(--background-modifier-border);
+  background: var(--mono-border);
+  width: 1px;
 }
 
-/* ============================
-   tabs — terminal tab strip
-   ============================ */
+/* ==================================================
+   TABS — terminal tab strip with index
+   ================================================== */
 
 .workspace-tab-header-container {
-  border-bottom: 1px solid var(--background-modifier-border);
+  border-bottom: 1px solid var(--mono-border);
   padding: 0;
+  height: 24px;
+  min-height: 24px;
 }
 
 .workspace-tab-header {
-  font-size: 12px;
-  padding: 3px 10px;
+  font-size: 11px;
+  padding: 2px 8px;
   color: var(--text-muted);
 }
 
@@ -278,28 +304,29 @@ body {
   background: var(--background-modifier-hover);
 }
 
-/* ============================
-   status bar — tmux/vim status line
-   ============================ */
+/* ==================================================
+   STATUS BAR — vim/tmux status line
+   ================================================== */
 
 .status-bar {
   background: var(--mono-border);
   border: none;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-normal);
-  padding: 1px 8px;
-  max-height: 22px;
+  padding: 0 8px;
+  max-height: 20px;
+  line-height: 20px;
 }
 
-/* ============================
-   sidebar — tree command output
-   ============================ */
+/* ==================================================
+   FILE EXPLORER — tree command
+   ================================================== */
 
 .nav-file-title,
 .nav-folder-title {
   font-size: 12px;
-  padding: 0px 6px;
-  line-height: 1.6;
+  padding: 0 4px;
+  line-height: 1.5;
 }
 
 .nav-folder-title {
@@ -307,24 +334,74 @@ body {
   font-weight: 700;
 }
 
+.nav-folder-title::before {
+  content: "▸ ";
+  color: var(--text-faint);
+  font-weight: 400;
+}
+
+.nav-folder-title.is-collapsed::before {
+  content: "▸ ";
+}
+
 .nav-file-title-content::before {
-  content: "- ";
+  content: "  ";
   color: var(--text-faint);
 }
 
-.nav-folder-collapse-indicator { color: var(--text-faint); }
+.nav-folder-collapse-indicator { display: none; }
 
-.nav-header { display: none; }
+.tree-item-icon { display: none; }
 
-/* ============================
-   headings — visible markers, ANSI coloring
-   ============================ */
+/* ==================================================
+   SEARCH — grep output
+   ================================================== */
+
+.search-result-file-title {
+  color: var(--color-blue);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.search-result-file-matched-text {
+  color: var(--text-accent);
+  background: rgba(100, 200, 120, 0.1);
+}
+
+.search-result-file-match {
+  font-size: 12px;
+  padding: 1px 0;
+}
+
+.search-input-container input {
+  font-size: 13px;
+}
+
+.search-input-container::before {
+  content: "grep ";
+  color: var(--text-faint);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+}
+
+/* ==================================================
+   HEADINGS — all 1em, ANSI color hierarchy
+   ================================================== */
 
 .cm-formatting-header { color: var(--text-faint); }
 
-.markdown-rendered h1 { border-bottom: none; margin: 1em 0 0.5em; }
-.markdown-rendered h2 { margin: 1em 0 0.4em; }
-.markdown-rendered h3 { margin: 0.8em 0 0.3em; }
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.markdown-rendered h4,
+.markdown-rendered h5,
+.markdown-rendered h6 {
+  border: none;
+  margin: 0.8em 0 0.3em;
+  padding: 0;
+}
 
 .markdown-rendered h1::before { content: "# "; color: var(--text-faint); font-weight: 400; }
 .markdown-rendered h2::before { content: "## "; color: var(--text-faint); font-weight: 400; }
@@ -333,15 +410,16 @@ body {
 .markdown-rendered h5::before { content: "##### "; color: var(--text-faint); font-weight: 400; }
 .markdown-rendered h6::before { content: "###### "; color: var(--text-faint); font-weight: 400; }
 
-/* ============================
-   code — same font, barely different
-   ============================ */
+/* ==================================================
+   CODE — inline is green, blocks are pipe-bordered
+   ================================================== */
 
 .markdown-rendered pre {
   background: var(--code-background);
+  border: none;
   border-left: 2px solid var(--text-faint);
-  padding: 6px 12px;
-  margin: 0.5em 0;
+  padding: 4px 12px;
+  margin: 0.4em 0;
 }
 
 .markdown-rendered pre code { font-size: 1em; line-height: 1.5; }
@@ -354,126 +432,212 @@ body {
   color: var(--color-green);
 }
 
-/* ============================
-   blockquotes — pipe prefix
-   ============================ */
+/* ==================================================
+   BLOCKQUOTES — pipe
+   ================================================== */
 
 .markdown-rendered blockquote {
   border-left: 2px solid var(--text-faint);
   padding-left: 1em;
   color: var(--text-muted);
-  margin: 0.5em 0;
+  margin: 0.4em 0;
 }
 
-/* ============================
-   links — always underlined
-   ============================ */
+/* ==================================================
+   LINKS — always visible
+   ================================================== */
 
-.markdown-rendered a {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
+.markdown-rendered a { text-decoration: underline; text-underline-offset: 2px; }
 
-/* ============================
-   hr — ascii dashes
-   ============================ */
+/* ==================================================
+   HR — dashed
+   ================================================== */
 
-.markdown-rendered hr {
-  border: none;
-  border-top: 1px dashed var(--text-faint);
-  margin: 1em 0;
-}
+.markdown-rendered hr { border: none; border-top: 1px dashed var(--text-faint); margin: 1em 0; }
 
-/* ============================
-   bold / italic — ANSI
-   ============================ */
+/* ==================================================
+   BOLD / ITALIC / STRIKE — ANSI escape codes
+   ================================================== */
 
 .theme-dark strong, .theme-dark .cm-strong { color: #ffffff; }
 .theme-dark em, .theme-dark .cm-em { color: var(--color-yellow); font-style: normal; }
 .theme-light strong, .theme-light .cm-strong { color: #000000; }
 .theme-light em, .theme-light .cm-em { color: var(--color-orange); font-style: normal; }
+del, .cm-strikethrough { color: var(--text-faint); text-decoration: line-through; }
 
-/* ============================
-   strikethrough — ANSI dim
-   ============================ */
-
-del, .cm-strikethrough { color: var(--text-faint); }
-
-/* ============================
-   tags — [bracketed]
-   ============================ */
+/* ==================================================
+   TAGS — [bracketed]
+   ================================================== */
 
 .tag { font-size: 1em; padding: 0; }
 .tag::before { content: "["; color: var(--text-faint); }
 .tag::after { content: "]"; color: var(--text-faint); }
 
-/* ============================
-   checkboxes
-   ============================ */
+/* ==================================================
+   CHECKBOXES
+   ================================================== */
 
 input[type="checkbox"] { border: 1px solid var(--text-muted); background: transparent; }
 input[type="checkbox"]:checked { background: var(--interactive-accent); border-color: var(--interactive-accent); }
 
-/* ============================
-   active line + cursor
-   ============================ */
+/* ==================================================
+   ACTIVE LINE + CURSOR
+   ================================================== */
 
 .cm-active.cm-line { background: rgba(255, 255, 255, 0.03); }
 .theme-light .cm-active.cm-line { background: rgba(0, 0, 0, 0.025); }
 .cm-focused .cm-cursor { border-left-color: var(--interactive-accent); border-left-width: 2px; }
 
-/* ============================
-   command palette — prompt
-   ============================ */
+/* ==================================================
+   COMMAND PALETTE — shell prompt
+   ================================================== */
 
-.prompt { border: 1px solid var(--background-modifier-border); background: var(--mono-bg); }
-.prompt-input { font-size: 14px; padding: 6px 10px; }
-.suggestion-item { font-size: 12px; padding: 3px 10px; }
+.prompt { border: 1px solid var(--mono-border); }
 
-/* ============================
-   tables — ascii grid
-   ============================ */
+.prompt-input-container::before {
+  content: "$ ";
+  color: var(--text-accent);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
 
-.markdown-rendered th, .markdown-rendered td { border: 1px solid var(--background-modifier-border); padding: 2px 8px; font-size: 1em; }
+.prompt-input { font-size: 14px; padding: 6px 8px; }
+.prompt-input::placeholder { color: var(--text-faint); }
+.suggestion-item { font-size: 12px; padding: 2px 8px; }
+.suggestion-item.is-selected { background: var(--background-modifier-hover); color: var(--text-accent); }
+
+/* ==================================================
+   TABLES — ascii
+   ================================================== */
+
+.markdown-rendered th, .markdown-rendered td { border: 1px solid var(--mono-border); padding: 2px 8px; font-size: 1em; }
 .markdown-rendered th { font-weight: 700; }
 
-/* ============================
-   callouts — flat box
-   ============================ */
+/* ==================================================
+   CALLOUTS — bordered output box
+   ================================================== */
 
-.callout { background: var(--code-background); border: 1px solid var(--background-modifier-border); border-radius: 0; }
+.callout { background: var(--code-background); border: 1px solid var(--mono-border); border-radius: 0; }
+.callout-title { font-size: 12px; }
 
-/* ============================
-   images — raw
-   ============================ */
+/* ==================================================
+   PROPERTIES / FRONTMATTER — key=value
+   ================================================== */
+
+.metadata-container { border: none; border-bottom: 1px solid var(--mono-border); padding: 4px 0; }
+.metadata-property { border: none; padding: 1px 0; }
+.metadata-property-key { font-size: 12px; }
+.metadata-property-value { font-size: 12px; }
+.metadata-add-button { font-size: 11px; color: var(--text-faint); }
+
+/* ==================================================
+   BACKLINKS — like grep matches
+   ================================================== */
+
+.backlink-pane { font-size: 12px; }
+.backlink-pane .search-result-file-title { font-size: 12px; color: var(--color-blue); }
+.backlink-pane .tree-item-self { padding: 1px 4px; }
+
+/* ==================================================
+   CONTEXT MENU — flat
+   ================================================== */
+
+.menu { border: 1px solid var(--mono-border); padding: 2px 0; }
+.menu-item { font-size: 12px; padding: 3px 8px; }
+.menu-separator { border-color: var(--mono-border); }
+
+/* ==================================================
+   BUTTONS — terminal style
+   ================================================== */
+
+button, .clickable-icon {
+  border-radius: 0;
+  font-size: 12px;
+}
+
+.mod-cta {
+  border: 1px solid var(--interactive-accent);
+  font-weight: 400;
+}
+
+/* ==================================================
+   SIDEBAR TOGGLE — minimal
+   ================================================== */
+
+.sidebar-toggle-button { border: none; padding: 2px; }
+
+/* ==================================================
+   MODALS / SETTINGS
+   ================================================== */
+
+.modal { border: 1px solid var(--mono-border); border-radius: 0; max-width: 700px; }
+.modal-close-button { color: var(--text-faint); font-size: 12px; }
+.modal-title { font-size: 14px; font-weight: 700; }
+.setting-item { border-top: 1px solid var(--mono-border); padding: 6px 0; font-size: 13px; }
+.setting-item-name { font-weight: 400; }
+.setting-item-description { font-size: 11px; color: var(--text-muted); }
+
+/* ==================================================
+   TOOLTIPS
+   ================================================== */
+
+.tooltip { background: var(--mono-surface); border: 1px solid var(--mono-border); border-radius: 0; color: var(--text-normal); font-size: 11px; padding: 2px 6px; }
+
+/* ==================================================
+   NOTICES / NOTIFICATIONS — stdout
+   ================================================== */
+
+.notice { background: var(--mono-surface); border: 1px solid var(--mono-border); border-radius: 0; color: var(--text-normal); font-size: 12px; }
+
+/* ==================================================
+   GRAPH VIEW — terminal aesthetic
+   ================================================== */
+
+.graph-view.color-fill { color: var(--text-accent); }
+.graph-view.color-line { color: var(--mono-border); }
+.graph-view.color-text { color: var(--text-muted); }
+.graph-view.color-fill-highlight { color: var(--text-accent); }
+
+/* ==================================================
+   EMBEDS
+   ================================================== */
+
+.markdown-embed { border: 1px solid var(--mono-border); border-radius: 0; padding: 4px 8px; }
+.markdown-embed-title { font-size: 11px; color: var(--text-faint); }
+.markdown-embed-link { font-size: 11px; }
+
+/* ==================================================
+   IMAGES — no flair
+   ================================================== */
 
 img { border-radius: 0; }
 
-/* ============================
-   embeds — flatten
-   ============================ */
+/* ==================================================
+   LISTS — tighter
+   ================================================== */
 
-.markdown-embed { border: 1px solid var(--background-modifier-border); border-radius: 0; padding: 4px 8px; }
-.markdown-embed-title { font-size: 12px; color: var(--text-muted); }
+.markdown-rendered ul, .markdown-rendered ol { padding-inline-start: 2em; }
+.markdown-rendered li { margin: 0; }
 
-/* ============================
-   modal / settings — flatten
-   ============================ */
+/* ==================================================
+   PARAGRAPHS — denser
+   ================================================== */
 
-.modal { border: 1px solid var(--background-modifier-border); border-radius: 0; }
-.modal-close-button { color: var(--text-muted); }
-.setting-item { border-top: 1px solid var(--background-modifier-border); padding: 8px 0; }
+.markdown-rendered p { margin: 0.4em 0; }
 
-/* ============================
-   tooltips
-   ============================ */
+/* ==================================================
+   OUTLINE PANE
+   ================================================== */
 
-.tooltip { background: var(--mono-surface); border: 1px solid var(--background-modifier-border); border-radius: 0; color: var(--text-normal); font-size: 12px; }
+.outline-pane .tree-item-self { font-size: 12px; padding: 1px 4px; }
+.outline-pane .tree-item-inner { color: var(--text-muted); }
 
-/* ============================
-   mobile
-   ============================ */
+/* ==================================================
+   MOBILE
+   ================================================== */
 
 .is-mobile { --font-text-size: 13px; }
 .is-mobile .workspace-ribbon.mod-left { display: none; }
-.is-mobile .view-header { height: 24px; }
+.is-mobile .view-header { height: 24px; min-height: 24px; }
