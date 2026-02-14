@@ -1,28 +1,25 @@
 # Selah
 
-A minimal Obsidian theme. Clean design, warm tones, quiet interface.
+*Be still, and know.* — Psalm 46:10
 
-*Selah* — a word from the Psalms meaning to pause and reflect.
+A quiet Obsidian theme for those who build and believe. Serif text on parchment tones. Nothing extra.
 
 ## Install
-
-Copy into your vault's theme directory:
 
 ```
 cp -r obsidian-theme-selah ~/.obsidian/themes/Selah
 ```
 
-Enable in **Settings > Appearance > Themes**.
+**Settings > Appearance > Themes > Selah**
 
-## Features
+## Design
 
-- System font stack (SF Pro, Inter) with monospace code
-- Warm neutral palette — not cold, not loud
-- Apple-smooth radii with monospace details in status bar and tags
-- Warm gold accent color
-- Generous line height and spacing
-- Lean CSS for fast rendering
-- Dark and light modes
+- Serif text (Palatino, Georgia) for reading and writing
+- System sans for UI, monospace for code
+- Warm parchment palette — cream whites, leather darks
+- Antique gold accent
+- 1.8 line height — room to breathe
+- ~160 lines of CSS total
 
 ## License
 
