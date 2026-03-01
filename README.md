@@ -1,10 +1,10 @@
 # Selah
 
-Obsidian as a terminal emulator.
+A minimal, clean, and elegant Apple iOS-inspired theme for Obsidian.
 
-Zero transitions. Zero shadows. Zero animations. Zero rounded corners. Zero scrollbars. One background. Everything monospace. ANSI colors. The UI disappears.
+Features native Apple typography, modern glassmorphism (translucent blurs), rounded corners, vibrant interactive elements, and FullCalendar integration.
 
-```
+```bash
 cp -r obsidian-theme-selah ~/.obsidian/themes/Selah
 ```
 
