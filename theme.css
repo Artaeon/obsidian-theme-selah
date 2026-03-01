@@ -342,43 +342,54 @@ textarea:focus {
 /* Event Blocks (Apple Style) */
 .tasksCalendar .event,
 .fc-event,
-.fc-timegrid-event {
-   border-radius: 6px !important;
+.fc-timegrid-event,
+.fc-v-event,
+.fc-h-event {
    border: none !important;
-   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+   border-left: none !important;
+   border-right: none !important;
+   border-top: none !important;
+   border-bottom: none !important;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
    font-size: 0.85em !important;
    padding: 4px 6px !important;
-   color: #fff !important;
+   border-radius: 6px !important;
+   overflow: hidden;
+   /* Clips any weird plugin ribbon injection */
    transition: transform 0.15s ease, filter 0.15s ease !important;
-   backdrop-filter: blur(10px) !important;
-   -webkit-backdrop-filter: blur(10px) !important;
 }
 
+/* Light mode text contrast for pastel ICS backgrounds */
+.theme-light .fc-event,
+.theme-light .fc-event-main,
+.theme-light .fc-event-title,
+.theme-light .fc-event-time,
+.theme-light .fc-event-title-container,
+.theme-light .tasksCalendar .event * {
+   color: #1a1a1a !important;
+   font-weight: 500;
+}
+
+/* Dark mode text contrast for dark ICS backgrounds */
+.theme-dark .fc-event,
+.theme-dark .fc-event-main,
+.theme-dark .fc-event-title,
+.theme-dark .fc-event-time,
+.theme-dark .fc-event-title-container,
+.theme-dark .tasksCalendar .event * {
+   color: #ffffff !important;
+   font-weight: 500;
+}
+
+/* Base Fallbacks. We use standard specificity so inline ICS background-color applies smoothly */
 .theme-light .tasksCalendar .event,
 .theme-light .fc-event {
-   background-color: var(--task-color, rgba(0, 122, 255, 0.15)) !important;
-   color: var(--task-text-color, #004fb0) !important;
-   border-left: 3px solid var(--task-border-color, #007aff) !important;
+   background-color: var(--event-color, var(--fc-event-bg-color, rgba(0, 122, 255, 0.15)));
 }
 
 .theme-dark .tasksCalendar .event,
 .theme-dark .fc-event {
-   background-color: var(--task-color, rgba(10, 132, 255, 0.25)) !important;
-   color: var(--task-text-color, #fff) !important;
-   border-left: 3px solid var(--task-border-color, #0a84ff) !important;
-}
-
-/* Fallback for explicit inline tag colors (Day Planner / TaskNotes direct ICS styles) */
-.fc-event[style*="background-color"],
-.fc-event[style*="--event-color"] {
-   border-left: 3px solid currentColor !important;
-}
-
-/* Fix text and outline when custom background is set */
-.theme-light .fc-event[style*="background-color"],
-.theme-light .fc-event[style*="--event-color"] {
-   filter: brightness(0.95);
-   color: currentColor !important;
+   background-color: var(--event-color, var(--fc-event-bg-color, rgba(10, 132, 255, 0.25)));
 }
 
 .tasksCalendar .event:hover,
@@ -389,21 +400,9 @@ textarea:focus {
 
 /* All Day Events */
 .fc-daygrid-event {
-   background-color: var(--interactive-accent) !important;
-   color: #fff !important;
    border-radius: 5px !important;
    padding: 3px 6px !important;
-   border-left: none !important;
-}
-
-.theme-light .fc-daygrid-event {
-   background-color: rgba(0, 122, 255, 0.15) !important;
-   color: #004fb0 !important;
-}
-
-.theme-dark .fc-daygrid-event {
-   background-color: rgba(10, 132, 255, 0.25) !important;
-   color: #fff !important;
+   border: none !important;
 }
 
 /* Current Time Indicator (Red line & circle like iOS Calendar) */
