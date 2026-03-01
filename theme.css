@@ -1,643 +1,308 @@
-/* selah */
-
-/* perf: nuke every gpu-heavy effect */
-*, *::before, *::after {
-  transition: none !important;
-  animation: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
+/* iOS / Apple Inspired Theme for Obsidian */
 
 body {
-  --font-interface-theme: 'SF Mono', 'JetBrains Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace;
-  --font-text-theme: 'SF Mono', 'JetBrains Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace;
-  --font-monospace-theme: 'SF Mono', 'JetBrains Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace;
-  --font-text-size: 14px;
+  /* Typography */
+  --font-interface-theme: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-text-theme: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-monospace-theme: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+  
+  --font-text-size: 16px;
   --line-height-normal: 1.5;
-  --line-height-tight: 1.3;
+  --line-height-tight: 1.25;
+  
   --font-normal: 400;
-  --font-medium: 400;
-  --font-semibold: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
   --font-bold: 700;
-  --bold-modifier: 700;
-  --radius-s: 0;
-  --radius-m: 0;
-  --radius-l: 0;
-  --input-radius: 0;
-  --tab-radius-active: 0;
-  --checkbox-radius: 0;
-  --toggle-radius: 0;
-  --toggle-thumb-radius: 0;
-  --slider-thumb-radius: 0;
+  --bold-modifier: 600;
+  
+  /* Radii */
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --input-radius: 10px;
+  --tab-radius-active: 10px;
+  --checkbox-radius: 6px;
+  --toggle-radius: 16px;
+  --toggle-thumb-radius: 14px;
+  --slider-thumb-radius: 14px;
+  
   --border-width: 1px;
-  --h1-size: 1em;
-  --h2-size: 1em;
-  --h3-size: 1em;
-  --h4-size: 1em;
+  
+  /* Headings */
+  --h1-size: 2em;
+  --h2-size: 1.5em;
+  --h3-size: 1.25em;
+  --h4-size: 1.1em;
   --h5-size: 1em;
   --h6-size: 1em;
   --h1-weight: 700;
-  --h2-weight: 700;
-  --h3-weight: 700;
-  --h4-weight: 700;
-  --h5-weight: 400;
-  --h6-weight: 400;
-  --heading-spacing: 0;
-  --list-indent: 2em;
-  --list-spacing: 0;
-  -webkit-font-smoothing: auto;
-  -moz-osx-font-smoothing: auto;
+  --h2-weight: 600;
+  --h3-weight: 600;
+  --h4-weight: 600;
+  --h5-weight: 600;
+  --h6-weight: 600;
+  
+  --heading-spacing: 0.5em;
+  --list-indent: 1.5em;
+  --list-spacing: 0.1em;
+  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ==================================================
-   DARK
-   ================================================== */
-
-.theme-dark {
-  --accent-h: 130;
-  --accent-s: 60%;
-  --accent-l: 62%;
-  --mono-bg: #0d0d0d;
-  --mono-border: #1e1e1e;
-  --mono-surface: #141414;
-  --color-base-00: var(--mono-bg);
-  --color-base-05: var(--mono-bg);
-  --color-base-10: var(--mono-bg);
-  --color-base-20: var(--mono-border);
-  --color-base-25: #252525;
-  --color-base-30: #2c2c2c;
-  --color-base-35: #383838;
-  --color-base-40: #484848;
-  --color-base-50: #606060;
-  --color-base-60: #808080;
-  --color-base-70: #a0a0a0;
-  --color-base-100: #d4d4d4;
-  --background-primary: var(--mono-bg);
-  --background-primary-alt: var(--mono-bg);
-  --background-secondary: var(--mono-bg);
-  --background-secondary-alt: var(--mono-bg);
-  --background-modifier-hover: rgba(255, 255, 255, 0.05);
-  --background-modifier-active-hover: rgba(255, 255, 255, 0.08);
-  --background-modifier-border: var(--mono-border);
-  --background-modifier-border-hover: #2c2c2c;
-  --background-modifier-border-focus: #484848;
-  --background-modifier-form-field: var(--mono-surface);
-  --text-normal: #d4d4d4;
-  --text-muted: #606060;
-  --text-faint: #383838;
-  --text-on-accent: #0d0d0d;
-  --text-accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
-  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) + 10%));
-  --text-selection: rgba(100, 200, 120, 0.15);
-  --text-error: #f47067;
-  --text-success: #56d364;
-  --interactive-normal: var(--mono-surface);
-  --interactive-hover: var(--mono-border);
-  --interactive-accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
-  --interactive-accent-hovered: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) + 10%));
-  --titlebar-background: var(--mono-bg);
-  --titlebar-background-focused: var(--mono-bg);
-  --tab-container-background: var(--mono-bg);
-  --color-red: #f47067;
-  --color-orange: #e09b56;
-  --color-yellow: #e3d160;
-  --color-green: #56d364;
-  --color-cyan: #56d4c4;
-  --color-blue: #58a6ff;
-  --color-purple: #bc8cff;
-  --color-pink: #f778ba;
-  --h1-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
-  --h2-color: var(--color-blue);
-  --h3-color: var(--color-cyan);
-  --h4-color: var(--color-purple);
-  --h5-color: var(--text-muted);
-  --h6-color: var(--text-faint);
-  --code-background: var(--mono-surface);
-  --tag-background: transparent;
-  --tag-color: var(--color-cyan);
-  --nav-item-color: var(--text-muted);
-  --nav-item-color-hover: var(--text-normal);
-  --nav-item-color-active: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
-  --nav-item-background-hover: var(--background-modifier-hover);
-  --nav-indentation-guide-color: var(--mono-border);
-  --list-marker-color: var(--text-faint);
-  --metadata-label-color: var(--color-blue);
-  --metadata-input-background: var(--mono-surface);
-}
-
-/* ==================================================
-   LIGHT
-   ================================================== */
-
+/* --------------------------------------
+   LIGHT THEME (iOS Light)
+   -------------------------------------- */
 .theme-light {
-  --accent-h: 130;
-  --accent-s: 50%;
-  --accent-l: 32%;
-  --mono-bg: #f5f5f5;
-  --mono-border: #d8d8d8;
-  --mono-surface: #ebebeb;
-  --color-base-00: var(--mono-bg);
-  --color-base-05: var(--mono-bg);
-  --color-base-10: var(--mono-bg);
-  --color-base-20: var(--mono-border);
-  --color-base-25: #cccccc;
-  --color-base-30: #c0c0c0;
-  --color-base-35: #aaaaaa;
-  --color-base-40: #909090;
-  --color-base-50: #707070;
-  --color-base-60: #555555;
-  --color-base-70: #383838;
-  --color-base-100: #1a1a1a;
-  --background-primary: var(--mono-bg);
-  --background-primary-alt: var(--mono-bg);
-  --background-secondary: var(--mono-bg);
-  --background-secondary-alt: var(--mono-bg);
-  --background-modifier-hover: rgba(0, 0, 0, 0.04);
-  --background-modifier-active-hover: rgba(0, 0, 0, 0.07);
-  --background-modifier-border: var(--mono-border);
-  --background-modifier-border-hover: #c0c0c0;
-  --background-modifier-border-focus: #909090;
-  --background-modifier-form-field: var(--mono-surface);
-  --text-normal: #1a1a1a;
-  --text-muted: #707070;
-  --text-faint: #b0b0b0;
-  --text-on-accent: #f5f5f5;
-  --text-accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
-  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 8%));
-  --text-selection: rgba(60, 140, 80, 0.12);
-  --text-error: #c33;
-  --text-success: #282;
-  --interactive-normal: var(--mono-surface);
-  --interactive-hover: var(--mono-border);
-  --interactive-accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
-  --interactive-accent-hovered: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 8%));
-  --titlebar-background: var(--mono-bg);
-  --titlebar-background-focused: var(--mono-bg);
-  --tab-container-background: var(--mono-bg);
-  --color-red: #c33;
-  --color-orange: #a65c00;
-  --color-yellow: #8a7000;
-  --color-green: #282;
-  --color-cyan: #077;
-  --color-blue: #268;
-  --color-purple: #63c;
-  --color-pink: #b35;
-  --h1-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
-  --h2-color: var(--color-blue);
-  --h3-color: var(--color-cyan);
-  --h4-color: var(--color-purple);
-  --h5-color: var(--text-muted);
-  --h6-color: var(--text-faint);
-  --code-background: var(--mono-surface);
-  --tag-background: transparent;
-  --tag-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
-  --nav-item-color: var(--text-muted);
-  --nav-item-color-hover: var(--text-normal);
-  --nav-item-color-active: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
-  --nav-item-background-hover: var(--background-modifier-hover);
-  --nav-indentation-guide-color: var(--mono-border);
-  --list-marker-color: var(--text-faint);
-  --metadata-label-color: var(--color-blue);
-  --metadata-input-background: var(--mono-surface);
+  --background-primary: #ffffff;
+  --background-primary-alt: #f2f2f7;
+  --background-secondary: #f2f2f7;
+  --background-secondary-alt: #e5e5ea;
+  
+  --background-modifier-hover: rgba(0, 0, 0, 0.05);
+  --background-modifier-active-hover: rgba(0, 0, 0, 0.08);
+  --background-modifier-border: rgba(60, 60, 67, 0.18);
+  --background-modifier-border-hover: rgba(60, 60, 67, 0.25);
+  --background-modifier-border-focus: #007aff;
+  --background-modifier-form-field: rgba(0, 0, 0, 0.05);
+  
+  --text-normal: #000000;
+  --text-muted: rgba(60, 60, 67, 0.6);
+  --text-faint: rgba(60, 60, 67, 0.3);
+  --text-on-accent: #ffffff;
+  --text-accent: #007aff;
+  --text-accent-hover: #005bb5;
+  --text-selection: rgba(0, 122, 255, 0.2);
+  --text-error: #ff3b30;
+  --text-success: #34c759;
+  
+  --interactive-normal: #ffffff;
+  --interactive-hover: #e5e5ea;
+  --interactive-accent: #007aff;
+  --interactive-accent-hover: #005bb5;
+  
+  --titlebar-background: rgba(255, 255, 255, 0.85);
+  --titlebar-background-focused: rgba(255, 255, 255, 0.95);
+  --tab-container-background: #f2f2f7;
+  
+  --color-red: #ff3b30;
+  --color-orange: #ff9500;
+  --color-yellow: #ffcc00;
+  --color-green: #34c759;
+  --color-cyan: #32ade6;
+  --color-blue: #007aff;
+  --color-purple: #af52de;
+  --color-pink: #ff2d55;
+  
+  --code-background: rgba(0, 0, 0, 0.05);
 }
 
-/* ==================================================
-   ONE SURFACE
-   ================================================== */
+/* --------------------------------------
+   DARK THEME (iOS Dark)
+   -------------------------------------- */
+.theme-dark {
+  --background-primary: #000000;
+  --background-primary-alt: #1c1c1e;
+  --background-secondary: #000000;
+  --background-secondary-alt: #1c1c1e;
+  
+  --background-modifier-hover: rgba(255, 255, 255, 0.1);
+  --background-modifier-active-hover: rgba(255, 255, 255, 0.15);
+  --background-modifier-border: rgba(84, 84, 86, 0.65);
+  --background-modifier-border-hover: rgba(100, 100, 104, 0.65);
+  --background-modifier-border-focus: #0a84ff;
+  --background-modifier-form-field: #1c1c1e;
+  
+  --text-normal: #ffffff;
+  --text-muted: rgba(235, 235, 245, 0.6);
+  --text-faint: rgba(235, 235, 245, 0.3);
+  --text-on-accent: #ffffff;
+  --text-accent: #0a84ff;
+  --text-accent-hover: #409cff;
+  --text-selection: rgba(10, 132, 255, 0.3);
+  --text-error: #ff453a;
+  --text-success: #30d158;
+  
+  --interactive-normal: #1c1c1e;
+  --interactive-hover: #2c2c2e;
+  --interactive-accent: #0a84ff;
+  --interactive-accent-hover: #409cff;
+  
+  --titlebar-background: rgba(0, 0, 0, 0.7);
+  --titlebar-background-focused: rgba(0, 0, 0, 0.85);
+  --tab-container-background: #000000;
+  
+  --color-red: #ff453a;
+  --color-orange: #ff9f0a;
+  --color-yellow: #ffd60a;
+  --color-green: #30d158;
+  --color-cyan: #64d2ff;
+  --color-blue: #0a84ff;
+  --color-purple: #bf5af2;
+  --color-pink: #ff375f;
+  
+  --code-background: #1c1c1e;
+}
 
-.workspace-split,
-.workspace-leaf,
-.workspace-tabs,
-.workspace-tab-container,
-.workspace-tab-header-container,
-.mod-root .workspace-tab-header-container,
-.workspace-leaf-content,
-.view-content,
-.sidebar-toggle-button,
-.workspace-ribbon,
+/* --------------------------------------
+   Translucency (Backdrop Blur)
+   -------------------------------------- */
 .titlebar,
 .view-header,
-.modal-bg,
+.workspace-tab-header-container,
 .modal,
 .menu,
-.prompt,
-.suggestion-container,
-.search-result-container,
-.backlink-pane,
-.tag-pane-tag-pane,
-.community-modal-sidebar {
-  background: var(--mono-bg);
+.suggestion-container {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 }
 
-/* ==================================================
-   STRIP ALL CHROME — nuke every decorative element
-   ================================================== */
-
-.workspace-ribbon.mod-left,
-.workspace-tab-header-inner-close-button,
-.workspace-tab-header-new-tab,
-.workspace-tab-header-tab-list,
-.view-header-icon,
-.nav-header,
-.view-header-nav-buttons,
-.workspace-tab-header-spacer,
-.nav-buttons-container,
-.search-input-clear-button::before {
-  display: none;
+.modal {
+  background: var(--titlebar-background);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-l);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-.titlebar-button-container { opacity: 0.2; }
-::-webkit-scrollbar { width: 0; height: 0; }
-
-/* ==================================================
-   VIEW HEADER — terminal path display
-   ================================================== */
-
-.view-header {
-  border-bottom: 1px solid var(--mono-border);
-  height: 26px;
-  min-height: 26px;
-  padding: 0 8px;
+.menu, .suggestion-container, .prompt {
+  background: var(--titlebar-background);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
-.view-header-title-container::before {
-  content: "~/";
-  color: var(--text-faint);
-  font-size: 12px;
-}
-
-.view-header-title {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-/* ==================================================
-   PANE SPLITS — tmux style
-   ================================================== */
-
-.workspace-leaf-resize-handle {
-  background: var(--mono-border);
-  width: 1px;
-}
-
-/* ==================================================
-   TABS — terminal tab strip with index
-   ================================================== */
-
+/* --------------------------------------
+   Layout & Tabbing
+   -------------------------------------- */
 .workspace-tab-header-container {
-  border-bottom: 1px solid var(--mono-border);
-  padding: 0;
-  height: 24px;
-  min-height: 24px;
+  padding: 6px;
+  background-color: transparent;
+  border-bottom: 1px solid var(--background-modifier-border);
 }
 
 .workspace-tab-header {
-  font-size: 11px;
-  padding: 2px 8px;
+  border-radius: var(--tab-radius-active);
+  margin-right: 4px;
+  transition: all 0.2s ease;
+  font-weight: 500;
   color: var(--text-muted);
 }
 
 .workspace-tab-header.is-active {
-  color: var(--text-accent);
-  background: var(--background-modifier-hover);
-}
-
-/* ==================================================
-   STATUS BAR — vim/tmux status line
-   ================================================== */
-
-.status-bar {
-  background: var(--mono-border);
-  border: none;
-  font-size: 11px;
+  background-color: var(--background-primary);
   color: var(--text-normal);
-  padding: 0 8px;
-  max-height: 20px;
-  line-height: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* ==================================================
-   FILE EXPLORER — tree command
-   ================================================== */
-
-.nav-file-title,
-.nav-folder-title {
-  font-size: 12px;
-  padding: 0 4px;
-  line-height: 1.5;
+.workspace-split.mod-horizontal > * {
+  border-right: 1px solid var(--background-modifier-border);
 }
 
-.nav-folder-title {
-  color: var(--color-blue);
-  font-weight: 700;
+/* --------------------------------------
+   UI Element Overrides
+   -------------------------------------- */
+button, .mod-cta {
+  background-color: var(--interactive-normal);
+  color: var(--text-normal);
+  border-radius: var(--radius-m);
+  border: 1px solid var(--background-modifier-border);
+  font-weight: 500;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-.nav-folder-title::before {
-  content: "▸ ";
-  color: var(--text-faint);
-  font-weight: 400;
+button.mod-cta {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-color: transparent;
+  font-weight: 600;
 }
 
-.nav-folder-title.is-collapsed::before {
-  content: "▸ ";
+button:hover {
+  opacity: 0.85;
 }
 
-.nav-file-title-content::before {
-  content: "  ";
-  color: var(--text-faint);
+input[type="text"], input[type="search"], input[type="password"], textarea {
+  border-radius: var(--input-radius);
+  border: 1px solid transparent;
+  background-color: var(--background-modifier-form-field);
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+  color: var(--text-normal);
 }
 
-.nav-folder-collapse-indicator { display: none; }
-
-.tree-item-icon { display: none; }
-
-/* ==================================================
-   SEARCH — grep output
-   ================================================== */
-
-.search-result-file-title {
-  color: var(--color-blue);
-  font-size: 12px;
-  font-weight: 700;
+input:focus, textarea:focus {
+  border-color: var(--interactive-accent);
+  background-color: var(--background-primary);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+  outline: none;
+}
+.theme-dark input:focus, .theme-dark textarea:focus {
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
 }
 
-.search-result-file-matched-text {
-  color: var(--text-accent);
-  background: rgba(100, 200, 120, 0.1);
+/* Toggle Switch Styles */
+.checkbox-container {
+  border-radius: var(--toggle-radius);
+  background-color: var(--background-modifier-border);
+  border: none;
+  transition: background-color 0.3s ease;
 }
 
-.search-result-file-match {
-  font-size: 12px;
-  padding: 1px 0;
+.checkbox-container.is-enabled {
+  background-color: var(--color-green);
 }
 
-.search-input-container input {
-  font-size: 13px;
+.checkbox-container:after {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 0 1px rgba(0,0,0,0.1);
+  border-radius: 50%;
 }
 
-.search-input-container::before {
-  content: "grep ";
-  color: var(--text-faint);
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  padding-left: 6px;
-}
-
-/* ==================================================
-   HEADINGS — all 1em, ANSI color hierarchy
-   ================================================== */
-
-.cm-formatting-header { color: var(--text-faint); }
-
+/* --------------------------------------
+   Typography & Rendering
+   -------------------------------------- */
 .markdown-rendered h1,
 .markdown-rendered h2,
 .markdown-rendered h3,
 .markdown-rendered h4,
 .markdown-rendered h5,
 .markdown-rendered h6 {
-  border: none;
-  margin: 0.8em 0 0.3em;
-  padding: 0;
+  color: var(--text-normal);
+  letter-spacing: -0.02em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
 }
 
-.markdown-rendered h1::before { content: "# "; color: var(--text-faint); font-weight: 400; }
-.markdown-rendered h2::before { content: "## "; color: var(--text-faint); font-weight: 400; }
-.markdown-rendered h3::before { content: "### "; color: var(--text-faint); font-weight: 400; }
-.markdown-rendered h4::before { content: "#### "; color: var(--text-faint); font-weight: 400; }
-.markdown-rendered h5::before { content: "##### "; color: var(--text-faint); font-weight: 400; }
-.markdown-rendered h6::before { content: "###### "; color: var(--text-faint); font-weight: 400; }
-
-/* ==================================================
-   CODE — inline is green, blocks are pipe-bordered
-   ================================================== */
+.markdown-rendered code {
+  background-color: var(--code-background);
+  color: var(--color-pink);
+  border-radius: var(--radius-s);
+  padding: 2px 5px;
+  font-size: 0.9em;
+}
 
 .markdown-rendered pre {
-  background: var(--code-background);
-  border: none;
-  border-left: 2px solid var(--text-faint);
-  padding: 4px 12px;
-  margin: 0.4em 0;
+  background-color: var(--code-background);
+  border-radius: var(--radius-m);
+  padding: 12px;
+  border: 1px solid var(--background-modifier-border);
 }
 
-.markdown-rendered pre code { font-size: 1em; line-height: 1.5; }
-
-.cm-s-obsidian span.cm-inline-code,
-.markdown-rendered code {
-  font-size: 1em;
+.markdown-rendered pre code {
+  background-color: transparent;
+  color: inherit;
   padding: 0;
-  background: none;
-  color: var(--color-green);
 }
-
-/* ==================================================
-   BLOCKQUOTES — pipe
-   ================================================== */
 
 .markdown-rendered blockquote {
-  border-left: 2px solid var(--text-faint);
+  border-radius: 0 8px 8px 0;
+  border-left: 4px solid var(--interactive-accent);
   padding-left: 1em;
   color: var(--text-muted);
-  margin: 0.4em 0;
+  font-style: italic;
+  background-color: var(--code-background);
+  padding: 10px 16px;
 }
-
-/* ==================================================
-   LINKS — always visible
-   ================================================== */
-
-.markdown-rendered a { text-decoration: underline; text-underline-offset: 2px; }
-
-/* ==================================================
-   HR — dashed
-   ================================================== */
-
-.markdown-rendered hr { border: none; border-top: 1px dashed var(--text-faint); margin: 1em 0; }
-
-/* ==================================================
-   BOLD / ITALIC / STRIKE — ANSI escape codes
-   ================================================== */
-
-.theme-dark strong, .theme-dark .cm-strong { color: #ffffff; }
-.theme-dark em, .theme-dark .cm-em { color: var(--color-yellow); font-style: normal; }
-.theme-light strong, .theme-light .cm-strong { color: #000000; }
-.theme-light em, .theme-light .cm-em { color: var(--color-orange); font-style: normal; }
-del, .cm-strikethrough { color: var(--text-faint); text-decoration: line-through; }
-
-/* ==================================================
-   TAGS — [bracketed]
-   ================================================== */
-
-.tag { font-size: 1em; padding: 0; }
-.tag::before { content: "["; color: var(--text-faint); }
-.tag::after { content: "]"; color: var(--text-faint); }
-
-/* ==================================================
-   CHECKBOXES
-   ================================================== */
-
-input[type="checkbox"] { border: 1px solid var(--text-muted); background: transparent; }
-input[type="checkbox"]:checked { background: var(--interactive-accent); border-color: var(--interactive-accent); }
-
-/* ==================================================
-   ACTIVE LINE + CURSOR
-   ================================================== */
-
-.cm-active.cm-line { background: rgba(255, 255, 255, 0.03); }
-.theme-light .cm-active.cm-line { background: rgba(0, 0, 0, 0.025); }
-.cm-focused .cm-cursor { border-left-color: var(--interactive-accent); border-left-width: 2px; }
-
-/* ==================================================
-   COMMAND PALETTE — shell prompt
-   ================================================== */
-
-.prompt { border: 1px solid var(--mono-border); }
-
-.prompt-input-container::before {
-  content: "$ ";
-  color: var(--text-accent);
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  padding-left: 8px;
-}
-
-.prompt-input { font-size: 14px; padding: 6px 8px; }
-.prompt-input::placeholder { color: var(--text-faint); }
-.suggestion-item { font-size: 12px; padding: 2px 8px; }
-.suggestion-item.is-selected { background: var(--background-modifier-hover); color: var(--text-accent); }
-
-/* ==================================================
-   TABLES — ascii
-   ================================================== */
-
-.markdown-rendered th, .markdown-rendered td { border: 1px solid var(--mono-border); padding: 2px 8px; font-size: 1em; }
-.markdown-rendered th { font-weight: 700; }
-
-/* ==================================================
-   CALLOUTS — bordered output box
-   ================================================== */
-
-.callout { background: var(--code-background); border: 1px solid var(--mono-border); border-radius: 0; }
-.callout-title { font-size: 12px; }
-
-/* ==================================================
-   PROPERTIES / FRONTMATTER — key=value
-   ================================================== */
-
-.metadata-container { border: none; border-bottom: 1px solid var(--mono-border); padding: 4px 0; }
-.metadata-property { border: none; padding: 1px 0; }
-.metadata-property-key { font-size: 12px; }
-.metadata-property-value { font-size: 12px; }
-.metadata-add-button { font-size: 11px; color: var(--text-faint); }
-
-/* ==================================================
-   BACKLINKS — like grep matches
-   ================================================== */
-
-.backlink-pane { font-size: 12px; }
-.backlink-pane .search-result-file-title { font-size: 12px; color: var(--color-blue); }
-.backlink-pane .tree-item-self { padding: 1px 4px; }
-
-/* ==================================================
-   CONTEXT MENU — flat
-   ================================================== */
-
-.menu { border: 1px solid var(--mono-border); padding: 2px 0; }
-.menu-item { font-size: 12px; padding: 3px 8px; }
-.menu-separator { border-color: var(--mono-border); }
-
-/* ==================================================
-   BUTTONS — terminal style
-   ================================================== */
-
-button, .clickable-icon {
-  border-radius: 0;
-  font-size: 12px;
-}
-
-.mod-cta {
-  border: 1px solid var(--interactive-accent);
-  font-weight: 400;
-}
-
-/* ==================================================
-   SIDEBAR TOGGLE — minimal
-   ================================================== */
-
-.sidebar-toggle-button { border: none; padding: 2px; }
-
-/* ==================================================
-   MODALS / SETTINGS
-   ================================================== */
-
-.modal { border: 1px solid var(--mono-border); border-radius: 0; max-width: 700px; }
-.modal-close-button { color: var(--text-faint); font-size: 12px; }
-.modal-title { font-size: 14px; font-weight: 700; }
-.setting-item { border-top: 1px solid var(--mono-border); padding: 6px 0; font-size: 13px; }
-.setting-item-name { font-weight: 400; }
-.setting-item-description { font-size: 11px; color: var(--text-muted); }
-
-/* ==================================================
-   TOOLTIPS
-   ================================================== */
-
-.tooltip { background: var(--mono-surface); border: 1px solid var(--mono-border); border-radius: 0; color: var(--text-normal); font-size: 11px; padding: 2px 6px; }
-
-/* ==================================================
-   NOTICES / NOTIFICATIONS — stdout
-   ================================================== */
-
-.notice { background: var(--mono-surface); border: 1px solid var(--mono-border); border-radius: 0; color: var(--text-normal); font-size: 12px; }
-
-/* ==================================================
-   GRAPH VIEW — terminal aesthetic
-   ================================================== */
-
-.graph-view.color-fill { color: var(--text-accent); }
-.graph-view.color-line { color: var(--mono-border); }
-.graph-view.color-text { color: var(--text-muted); }
-.graph-view.color-fill-highlight { color: var(--text-accent); }
-
-/* ==================================================
-   EMBEDS
-   ================================================== */
-
-.markdown-embed { border: 1px solid var(--mono-border); border-radius: 0; padding: 4px 8px; }
-.markdown-embed-title { font-size: 11px; color: var(--text-faint); }
-.markdown-embed-link { font-size: 11px; }
-
-/* ==================================================
-   IMAGES — no flair
-   ================================================== */
-
-img { border-radius: 0; }
-
-/* ==================================================
-   LISTS — tighter
-   ================================================== */
-
-.markdown-rendered ul, .markdown-rendered ol { padding-inline-start: 2em; }
-.markdown-rendered li { margin: 0; }
-
-/* ==================================================
-   PARAGRAPHS — denser
-   ================================================== */
-
-.markdown-rendered p { margin: 0.4em 0; }
-
-/* ==================================================
-   OUTLINE PANE
-   ================================================== */
-
-.outline-pane .tree-item-self { font-size: 12px; padding: 1px 4px; }
-.outline-pane .tree-item-inner { color: var(--text-muted); }
-
-/* ==================================================
-   MOBILE
-   ================================================== */
-
-.is-mobile { --font-text-size: 13px; }
-.is-mobile .workspace-ribbon.mod-left { display: none; }
-.is-mobile .view-header { height: 24px; min-height: 24px; }
