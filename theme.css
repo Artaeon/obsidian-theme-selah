@@ -348,7 +348,6 @@ textarea:focus {
    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
    font-size: 0.85em !important;
    padding: 4px 6px !important;
-   background-color: var(--interactive-accent) !important;
    color: #fff !important;
    transition: transform 0.15s ease, filter 0.15s ease !important;
    backdrop-filter: blur(10px) !important;
@@ -357,16 +356,29 @@ textarea:focus {
 
 .theme-light .tasksCalendar .event,
 .theme-light .fc-event {
-   background-color: rgba(0, 122, 255, 0.15) !important;
-   color: #004fb0 !important;
-   border-left: 3px solid #007aff !important;
+   background-color: var(--task-color, rgba(0, 122, 255, 0.15)) !important;
+   color: var(--task-text-color, #004fb0) !important;
+   border-left: 3px solid var(--task-border-color, #007aff) !important;
 }
 
 .theme-dark .tasksCalendar .event,
 .theme-dark .fc-event {
-   background-color: rgba(10, 132, 255, 0.25) !important;
-   color: #fff !important;
-   border-left: 3px solid #0a84ff !important;
+   background-color: var(--task-color, rgba(10, 132, 255, 0.25)) !important;
+   color: var(--task-text-color, #fff) !important;
+   border-left: 3px solid var(--task-border-color, #0a84ff) !important;
+}
+
+/* Fallback for explicit inline tag colors (Day Planner / TaskNotes direct ICS styles) */
+.fc-event[style*="background-color"],
+.fc-event[style*="--event-color"] {
+   border-left: 3px solid currentColor !important;
+}
+
+/* Fix text and outline when custom background is set */
+.theme-light .fc-event[style*="background-color"],
+.theme-light .fc-event[style*="--event-color"] {
+   filter: brightness(0.95);
+   color: currentColor !important;
 }
 
 .tasksCalendar .event:hover,
