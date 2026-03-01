@@ -334,9 +334,22 @@ textarea:focus {
 /* Header background transparent to blend */
 .fc-theme-standard th {
    background-color: transparent !important;
-   font-weight: var(--font-semibold);
-   font-size: 0.9em;
-   padding: 8px 0 !important;
+   font-weight: 500;
+   font-size: 0.85em;
+   padding: 12px 0 !important;
+   color: var(--text-muted);
+}
+
+/* Header Text Cushion - Apple spacing */
+.fc-col-header-cell-cushion {
+   padding: 4px 12px !important;
+   border-radius: 16px;
+   transition: background-color 0.2s ease;
+}
+
+.fc-col-header-cell-cushion:hover {
+   text-decoration: none !important;
+   background-color: var(--background-modifier-hover);
 }
 
 /* Event Blocks (Apple Style) */
@@ -351,7 +364,7 @@ textarea:focus {
    border-top: none !important;
    border-bottom: none !important;
    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
-   font-size: 0.85em !important;
+   font-size: 0.80em !important;
    padding: 4px 6px !important;
    border-radius: 6px !important;
    overflow: hidden;
@@ -403,12 +416,34 @@ textarea:focus {
    border-radius: 5px !important;
    padding: 3px 6px !important;
    border: none !important;
+   font-size: 0.75em !important;
+   font-weight: 500;
+}
+
+/* Time Axis Labels (05:00, etc) - Small and faint like Apple */
+.fc-timegrid-slot-label-cushion,
+.fc-timegrid-axis-cushion {
+   font-size: 0.75em !important;
+   color: var(--text-faint) !important;
+   font-weight: 400 !important;
+   text-transform: lowercase;
+}
+
+/* Make gridlines incredibly faint */
+.fc-theme-standard td,
+.fc-theme-standard th {
+   border-color: rgba(128, 128, 128, 0.08) !important;
+}
+
+.theme-dark .fc-theme-standard td,
+.theme-dark .fc-theme-standard th {
+   border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Current Time Indicator (Red line & circle like iOS Calendar) */
 .fc-now-indicator-line {
    border-color: var(--color-red) !important;
-   border-width: 2px !important;
+   border-width: 1.5px !important;
 }
 
 .fc-now-indicator-arrow {
@@ -420,19 +455,28 @@ textarea:focus {
    transform: translate(-4.5px, -4.5px) !important;
 }
 
-/* Today Header Highlight (Red Text) */
-.fc-col-header-cell.fc-day-today .fc-scrollgrid-sync-inner,
+/* Today Header Highlight (Solid Red Pill with White Text) */
 .fc-day-today .fc-col-header-cell-cushion {
-   color: var(--color-red) !important;
+   background-color: var(--color-red) !important;
+   color: #fff !important;
    font-weight: 600 !important;
+   border-radius: 14px;
+   padding: 4px 12px !important;
+   box-shadow: 0 2px 6px rgba(255, 59, 48, 0.3);
 }
 
+.theme-dark .fc-day-today .fc-col-header-cell-cushion {
+   color: #fff !important;
+   box-shadow: 0 2px 6px rgba(255, 69, 58, 0.3);
+}
+
+/* Very subtle shaded background for the current day's column */
 .fc-day-today {
-   background-color: rgba(255, 59, 48, 0.03) !important;
+   background-color: rgba(255, 59, 48, 0.02) !important;
 }
 
 .theme-dark .fc-day-today {
-   background-color: rgba(255, 69, 58, 0.05) !important;
+   background-color: rgba(255, 69, 58, 0.04) !important;
 }
 
 /* Remove chunky timeline borders */
